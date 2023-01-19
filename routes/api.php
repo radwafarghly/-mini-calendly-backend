@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ScheduleDayController;
 use Illuminate\Http\Request;
@@ -33,7 +34,10 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth:api')->group(function () {
     /*Schedule api*/
     Route::apiResource('schedule', ScheduleController::class);
-
+    /*Schedule Day api*/
     Route::post('schedule/assgin/day/{schedule}', [ScheduleDayController::class, 'assginDayToSchedule']);
     Route::post('schedule/delete/day/{schedule}', [ScheduleDayController::class, 'deleteDayToSchedule']);
+    /* Event Api */
+    Route::apiResource('event', EventController::class);
+
 });

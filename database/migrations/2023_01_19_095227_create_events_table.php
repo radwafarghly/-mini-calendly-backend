@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('duration');
             $table->foreignId('schedule_id')->constrained('schedules')->onDelete('cascade');
-            $table->string('time_between');
+            $table->string('time_between')->default(0);
             // $table->string('event_type');
             // $table->string('location');
             $table->timestamps();

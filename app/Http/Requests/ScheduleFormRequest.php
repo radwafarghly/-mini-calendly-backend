@@ -28,13 +28,6 @@ class ScheduleFormRequest extends AbstractFormRequest
                     'name' => 'required|string|max:255',
                     'user_id' => 'required|integer|exists:users,id'
                 ];
-            }elseif($actionName == 'assginDayToSchedule'){
-                return [
-                    'day_id'               => 'required|integer|exists:users,id',
-                    'time_from'            => 'required|date_format:H:i',
-                    'time_to'              => 'required|date_format:H:i|after:time_from',
-                    // 'user_id'              => 'required|integer|exists:users,id',
-                ];
             }
         } else if ($method == 'PUT') {
             if ($actionName == 'update') {
