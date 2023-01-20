@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ScheduleDayController;
@@ -40,4 +41,5 @@ Route::middleware('auth:api')->group(function () {
     /* Event Api */
     Route::apiResource('event', EventController::class);
 
+    Route::get('calendar/range', [CalendarController::class, 'eventCalendar']);
 });
