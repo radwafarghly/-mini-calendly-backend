@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\EventConfirmedController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ScheduleDayController;
 use Illuminate\Http\Request;
@@ -42,4 +44,21 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('event', EventController::class);
 
     Route::get('calendar/range', [CalendarController::class, 'eventCalendar']);
+    Route::post('create/zoom/link', [MeetingController::class, 'createMeetingLink']);
+});
+
+Route::get('create/meeting/link', [MeetingController::class, 'createZoomMeeting']);
+
+Route::post('event/confirmed', [EventConfirmedController::class, 'EventConfirmed']);
+
+
+
+use App\Mail\EventConfirmedMail;
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test/email', function () {
+    $name = "Funny Coder";
+
+    //The email sending is done using the to method on the Mail facade
+    Mail::to('radwa.a.farghly@gmail.com')->send(new EventConfirmedMail($name));
 });
