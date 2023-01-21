@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\DayController;
 use App\Http\Controllers\EventConfirmedController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MeetingController;
@@ -43,6 +44,9 @@ Route::middleware('auth:api')->group(function () {
     /* Event Api */
     Route::apiResource('event', EventController::class);
     Route::get('calendar/range', [CalendarController::class, 'eventCalendar']);
+
+    /* Day Api */
+    Route::apiResource('day', DayController::class);
 });
 
 Route::post('event/confirmed', [EventConfirmedController::class, 'EventConfirmed']);
