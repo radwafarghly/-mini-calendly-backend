@@ -42,23 +42,19 @@ Route::middleware('auth:api')->group(function () {
     Route::post('schedule/delete/day/{schedule}', [ScheduleDayController::class, 'deleteDayToSchedule']);
     /* Event Api */
     Route::apiResource('event', EventController::class);
-
     Route::get('calendar/range', [CalendarController::class, 'eventCalendar']);
-    Route::post('create/zoom/link', [MeetingController::class, 'createMeetingLink']);
 });
-
-Route::get('create/meeting/link', [MeetingController::class, 'createZoomMeeting']);
 
 Route::post('event/confirmed', [EventConfirmedController::class, 'EventConfirmed']);
 
 
 
-use App\Mail\EventConfirmedMail;
-use Illuminate\Support\Facades\Mail;
+// use App\Mail\EventConfirmedMail;
+// use Illuminate\Support\Facades\gitail;
 
-Route::get('/test/email', function () {
-    $name = "Funny Coder";
+// Route::get('/test/email', function () {
+//     $name = "Funny Coder";
 
-    //The email sending is done using the to method on the Mail facade
-    Mail::to('radwa.a.farghly@gmail.com')->send(new EventConfirmedMail($name));
-});
+//     //The email sending is done using the to method on the Mail facade
+//     Mail::to('radwa.a.farghly@gmail.com')->send(new EventConfirmedMail($name));
+// });
