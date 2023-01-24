@@ -27,7 +27,7 @@ class EventFormRequest extends AbstractFormRequest
                 return [
                     'name'                => 'required|string|max:255',
                     'description'         => 'required|string',
-                    'slug'                => 'required|string|max:255|unique:events',
+                    'slug'                => 'required|string|max:255',
                     'duration'            => 'required',
                     'time_between'        => 'sometimes|required',
                     'schedule_id'         => 'required|integer|exists:schedules,id',
@@ -39,7 +39,7 @@ class EventFormRequest extends AbstractFormRequest
                 return [
                     'name'                => 'sometimes|required|string|max:255',
                     'description'         => 'sometimes|required|string',
-                    'slug'                => 'sometimes|required|string|max:255|unique:events',
+                    // 'slug'                => 'sometimes|required|string|max:255|unique:events',
                     'duration'            => 'sometimes|required',
                     'time_between'        => 'sometimes|required',
                     'schedule_id'         => 'required|integer|exists:schedules,id',

@@ -20,11 +20,16 @@ class EventConfirmedController extends Controller
 
     use  ZoomMeetingTrait;
 
+
+    // Confirmed  Event Time
+
     public function EventConfirmed(Request $request)
     {
         $event = Event::where('slug', $request->slug)->first();
         if ($event) {
+            // create zoom meting link 
             $meeting = $this->create($event, $request);
+            // store event Confirmed in data 
             if ($meeting) {
                 $eventConfirmed = EventConfirmed::create([
                     'event_id' => $event->id,
@@ -39,7 +44,7 @@ class EventConfirmedController extends Controller
                     "meeting_id"   => $meeting['data']['id'],
                     "meeting_password" => $meeting['data']['password']
                 ]);
-
+                // send email to user 
                 Mail::to($request->email)->send(new EventConfirmedMail($eventConfirmed));
 
                 return (new CalendarResource([]))->additional(ResponseType::simpleResponse('Event Confirmed successfully', true));

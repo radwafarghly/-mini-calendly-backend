@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\User;
-use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Log;
 
@@ -133,7 +131,7 @@ trait ZoomMeetingTrait
             'headers' => $this->headers,
             'body'    => json_encode([
                 'topic'      => $data['topic'],
-                'type'       => self::MEETING_TYPE_SCHEDULE,
+                'type'       => 2,
                 'start_time' => $this->toZoomTimeFormat($data['start_time']),
                 'duration'   => $data['duration'],
                 'agenda'     => (!empty($data['agenda'])) ? $data['agenda'] : null,

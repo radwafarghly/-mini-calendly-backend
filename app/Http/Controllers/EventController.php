@@ -36,8 +36,8 @@ class EventController extends Controller
     public function store(EventFormRequest $request)
     {
         $data = $request->validated();
-        // $data['slug'] = str_replace(' ', '_', $data['slug']) . Event::latest()->first()->id + 1;
-        $data['slug'] = str_replace(' ', '_', $data['slug']);
+        $data['slug'] = str_replace(' ', '_', $data['slug']) . Event::latest()->first()->id + 1;
+        // $data['slug'] = str_replace(' ', '_', $data['slug']);
         return (new EventResource(Event::create($data)))->additional(ResponseType::simpleResponse('Event created successfully', true));
     }
 
@@ -54,6 +54,7 @@ class EventController extends Controller
 
     /**
      *
+     * * update the specified resource.
      */
     public function update(EventFormRequest $request, Event $Event)
     {

@@ -22,10 +22,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
+/*authentication api */
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
@@ -39,26 +40,15 @@ Route::middleware('auth:api')->group(function () {
     /*Schedule api*/
     Route::apiResource('schedule', ScheduleController::class);
     /*Schedule Day api*/
-    Route::post('schedule/assgin/day/{schedule}', [ScheduleDayController::class, 'assginDayToSchedule']);
-    Route::post('schedule/delete/day/{schedule}', [ScheduleDayController::class, 'deleteDayToSchedule']);
+    Route::post('schedule/assgin/day/{schedule}', [ScheduleDayController::class, 'assginDayToSchedule']); // to update & store
+    Route::post('schedule/delete/day/{schedule}', [ScheduleDayController::class, 'deleteDayToSchedule']); // to delete
     /* Event Api */
     Route::apiResource('event', EventController::class);
-    Route::get('calendar/range', [CalendarController::class, 'eventCalendar']);
-
-    /* Day Api */
-    Route::apiResource('day', DayController::class);
 });
+/* Day Api */
 
+Route::apiResource('day', DayController::class);
+// calendar 
+Route::get('calendar/range', [CalendarController::class, 'eventCalendar']);
+// confirmed time
 Route::post('event/confirmed', [EventConfirmedController::class, 'EventConfirmed']);
-
-
-
-// use App\Mail\EventConfirmedMail;
-// use Illuminate\Support\Facades\gitail;
-
-// Route::get('/test/email', function () {
-//     $name = "Funny Coder";
-
-//     //The email sending is done using the to method on the Mail facade
-//     Mail::to('radwa.a.farghly@gmail.com')->send(new EventConfirmedMail($name));
-// });

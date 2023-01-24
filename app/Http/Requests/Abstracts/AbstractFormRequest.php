@@ -24,15 +24,17 @@ abstract class AbstractFormRequest extends FormRequest
     /**
      *
      */
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(
             response()->json(
                 [
-                    'data' => $validator->errors(),
+                    'errors' => $validator->errors(),
                     'message' => 'Failed validation',
-                    'success' => false
-                ], 
-                200
+                    'success' => false,
+                    'data'   => []
+                ],
+                400
             )
         );
     }
