@@ -52,7 +52,10 @@ class ScheduleController extends Controller
     }
 
     /**
+     * update the specified resource.
      *
+     * @param  Schedule  $category
+     * @return \Illuminate\Http\Response
      */
     public function update(ScheduleFormRequest $request, Schedule $schedule)
     {

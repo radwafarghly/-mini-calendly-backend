@@ -15,6 +15,8 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
+    // login auth user 
+
     public function login(UserFormRequest $request)
     {
         $credentials = $request->validated();
@@ -56,6 +58,8 @@ class AuthController extends Controller
             ->additional(ResponseType::simpleResponse('User data return successfully', true));
     }
 
+    // Register New user
+
     public function register(UserFormRequest $request)
     {
         $data = $request->validated();
@@ -68,6 +72,8 @@ class AuthController extends Controller
             ->additional(ResponseType::simpleResponse(trans('User created successfully'), true, $this->respondWithToken($token)));
     }
 
+
+    // Logout  auth user
     public function logout()
     {
         Auth::logout();

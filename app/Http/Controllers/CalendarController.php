@@ -15,23 +15,26 @@ use Illuminate\Http\Request;
 class CalendarController extends Controller
 {
 
+    // function will all date with time spot  if time is not available will be status  unavailable
+
     public function eventCalendar(Request $request)
     {
         if (Carbon::parse($request->end_range)->format('Y-m-d') < Carbon::now()->format('Y-m-d')) {
             return (new CalendarResource([]))->additional(ResponseType::simpleResponse('No avaliable time', false));
         }
 
-        $event = Event::where('slug', $request->slug)->first();
+        $event = Event::where('slug', $request->slug)->first(); // to get event 
+
         if ($event) {
-            $scheduleDays = Schedule::find($event->schedule_id)->days()->get();
+            $scheduleDays = Schedule::find($event->schedule_id)->days()->get(); // to get  Schedule day 
 
             $dates = [];
             foreach ($scheduleDays as $scheduleDay) {
+                //dates Range
                 $dateRange = CarbonPeriod::create(Carbon::parse($request->start_range)->format('Y-m-d'), Carbon::parse($request->end_range)->format('Y-m-d'));
-                // return $dateRange;
+
                 foreach ($dateRange as $date) {
                     if (Carbon::parse($date)->is($scheduleDay->name)) {
-                        // array_push($dates, $date->format('Y-m-d')); // to get all date of availavel time day
                         $startTime = new DateTime($date->format('Y-m-d') . $scheduleDay->pivot->time_from);
                         $endTime = new DateTime($date->format('Y-m-d') . ' ' . $scheduleDay->pivot->time_to);
                         $spot = [];
